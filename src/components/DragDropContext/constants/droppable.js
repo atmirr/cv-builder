@@ -1,0 +1,5 @@
+export const DROPPABLE_TYPE = {
+  SECTIONS: 'SECTIONS',
+  BLOCKS: 'BLOCKS',
+  FIELDS: 'FIELDS',
+};
