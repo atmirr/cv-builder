@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { get, set, unset } from "lodash";
+import { get, set, unset, findKey } from "lodash";
 
 export const slice = createSlice({
   name: "fields",
   initialState: {
     // TODO: Sample data should change!
+    // TODO: Add hide ability to fields
     name: { value: "Elon Musk" },
     position: {
       value: "",
@@ -21,6 +22,7 @@ export const slice = createSlice({
     experiences: {
       0: {
         id: 0,
+        orderIndex: 1,
         role: { value: "Senior Frontend Engineer 1" },
         company: { value: "Yocale" },
         companyDescription: {
@@ -32,20 +34,24 @@ export const slice = createSlice({
         activities: {
           0: {
             id: 0,
+            orderIndex: 1,
             activity: { value: "Refactor 1" },
           },
           1: {
             id: 1,
+            orderIndex: 2,
             activity: { value: "Refactor 2" },
           },
           2: {
             id: 2,
+            orderIndex: 3,
             activity: { value: "Refactor 3" },
           },
         },
       },
       1: {
         id: 1,
+        orderIndex: 2,
         role: { value: "Senior Frontend Engineer 2" },
         company: { value: "Yocale" },
         companyDescription: {
@@ -57,14 +63,17 @@ export const slice = createSlice({
         activities: {
           0: {
             id: 0,
+            orderIndex: 1,
             activity: { value: "Refactor 1" },
           },
           1: {
             id: 1,
+            orderIndex: 2,
             activity: { value: "Refactor 2" },
           },
           2: {
             id: 2,
+            orderIndex: 3,
             activity: { value: "Refactor 3" },
           },
         },
@@ -74,9 +83,13 @@ export const slice = createSlice({
   reducers: {
     reorder: (state, action) => {
       const { droppablePath: path, startIndex, endIndex } = action.payload;
-      const items = selectField(path)({ fields: state });
-      const [removed] = items.splice(startIndex, 1);
-      items.splice(endIndex, 0, removed);
+      const items = get(state, path);
+      const sourceIndex = findKey(items, { orderIndex: startIndex });
+      const destinationIndex = findKey(items, {
+        orderIndex: endIndex,
+      });
+      set(state, [...path, Number(sourceIndex), "orderIndex"], endIndex);
+      set(state, [...path, Number(destinationIndex), "orderIndex"], startIndex);
     },
     save: (state, action) => {
       const { path, value } = action.payload;
@@ -113,5 +126,13 @@ export const slice = createSlice({
 export const { reorder, save, add, remove, show, hide } = slice.actions;
 
 export const selectField = (path) => (state) => get(state.fields, path);
+
+export const selectFieldsList = (path) => (state) => {
+  const items = get(state.fields, path);
+  const sortedItems = Object.values(items).sort(
+    (a, b) => a.orderIndex - b.orderIndex
+  );
+  return sortedItems;
+};
 
 export default slice.reducer;

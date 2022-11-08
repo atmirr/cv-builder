@@ -1,14 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const SECTIONS = {
-  INTRO: 'intro',
-  EXPERIENCES: 'experiences',
+  INTRO: "intro",
+  EXPERIENCES: "experiences",
 };
 
 export const slice = createSlice({
-  name: 'layouts',
+  name: "layouts",
   initialState: {
-    selectedLayout: 'singleColumn',
+    selectedLayout: "singleColumn",
     layouts: {
       singleColumn: {
         column1: { grids: 12, items: [SECTIONS.INTRO, SECTIONS.EXPERIENCES] },
@@ -36,9 +36,9 @@ export const slice = createSlice({
   },
   reducers: {
     reorder: (state, action) => {
-      const { droppableId, startIndex, endIndex } = action.payload;
+      const { droppablePath, startIndex, endIndex } = action.payload;
       const currentLayout = state.selectedLayout;
-      const droppable = state.layouts[currentLayout][droppableId].items;
+      const droppable = state.layouts[currentLayout][droppablePath].items;
       const [removed] = droppable.splice(startIndex, 1);
       droppable.splice(endIndex, 0, removed);
     },

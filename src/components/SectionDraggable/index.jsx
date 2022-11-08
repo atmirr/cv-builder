@@ -30,13 +30,11 @@ const sectionComponents = {
 function SectionDraggable({ id, index }) {
   const section = useSelector(selectSection(id));
   const Section = sectionComponents[id];
-  const { hide } = section;
+  // const { hide } = section;
   return (
-    !hide && (
-      <Draggable id={id} index={index}>
-        <Section />
-      </Draggable>
-    )
+    <Draggable id={id} index={index}>
+      <Section />
+    </Draggable>
   );
 }
 

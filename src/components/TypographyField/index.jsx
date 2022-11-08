@@ -14,8 +14,8 @@ function TypographyField({
 }) {
   const fieldsPath = useContext(fieldsPathContext);
   const path = [...fieldsPath, fieldId];
-  const dispatch = useDispatch();
   const { value, placeholder, hide } = useSelector(selectField(path));
+  const dispatch = useDispatch();
   const onChange = (value) => {
     dispatch(
       save({

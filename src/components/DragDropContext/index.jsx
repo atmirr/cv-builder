@@ -1,15 +1,15 @@
-import React from 'react';
-import { split, map } from 'lodash';
-import { DragDropContext as DndDragDropContext } from 'react-beautiful-dnd';
-import { useDispatch } from 'react-redux';
-import { reorder as sectionsReorder, move } from '@slices/layouts';
-import { reorder as fieldsReorder } from '@slices/fields';
-import { DROPPABLE_TYPE } from './constants/droppable';
+import React from "react";
+import { split, map } from "lodash";
+import { DragDropContext as DndDragDropContext } from "react-beautiful-dnd";
+import { useDispatch } from "react-redux";
+import { reorder as sectionsReorder, move } from "@slices/layouts";
+import { reorder as fieldsReorder } from "@slices/fields";
+import { DROPPABLE_TYPE } from "./constants/droppable";
 
 function DragDropContext({ children, props }) {
   const dispatch = useDispatch();
   const generateFieldPath = (id) => {
-    const splittedId = split(id, '_');
+    const splittedId = split(id, "_");
     const path = map(splittedId, (id) => {
       const numberRegex = /^\d+$/;
       const isNumber = numberRegex.test(id);
@@ -63,7 +63,7 @@ function DragDropContext({ children, props }) {
             droppableDestinationId: destination.droppableId,
             startIndex: source.index,
             endIndex: destination.index,
-          }),
+          })
         );
       }
     }

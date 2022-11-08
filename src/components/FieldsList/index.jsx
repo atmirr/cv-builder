@@ -4,7 +4,7 @@ import { map, join } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import fieldsPathContext from "@contexts/fields-path";
-import { selectField, remove } from "@slices/fields";
+import { selectFieldsList, remove } from "@slices/fields";
 import { add } from "@slices/fields";
 // import { DROPPABLE_TYPE } from '@components/DragDropContext/constants/droppable';
 import Droppable from "@components/Droppable";
@@ -33,7 +33,7 @@ function FieldsList({
   const path = [...fieldsPath, fieldsListId];
   const classes = useStyles();
   const dispatch = useDispatch();
-  const fieldsList = useSelector(selectField(path));
+  const fieldsList = useSelector(selectFieldsList(path));
   const handleAddField = () => {
     dispatch(add({ path }));
   };
@@ -45,16 +45,16 @@ function FieldsList({
     >
       {fieldsList && (
         <Droppable id={generateId(path)} key={generateId(path)} type={type}>
-          {map(fieldsList, ({ id }, index) => {
+          {map(fieldsList, ({ id, orderIndex }) => {
             const itemPath = [...path, id];
             return (
               <Draggable
                 id={generateId(itemPath)}
                 key={generateId(itemPath)}
-                index={Number(index)}
+                index={Number(orderIndex)}
                 className={classes.block}
               >
-                <fieldsPathContext.Provider value={[...path, index]}>
+                <fieldsPathContext.Provider value={itemPath}>
                   <ItemComponent {...itemComponentProps}>
                     {children}
                     {button && (

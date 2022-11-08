@@ -13,8 +13,9 @@ const styles = () => ({});
 
 function Templates() {
   const layout = useSelector(selectCurrentLayout);
+  console.log("layout:", layout);
   return (
-    <Suspense fallback={<React.Fragment />}>
+    <Suspense fallback={<div>Loading...</div>}>
       <DragDropContext>
         <Grid container>
           {map(layout, ({ items: blocks, grids }, droppableId) => (
@@ -24,8 +25,12 @@ function Templates() {
               grids={grids}
               type={DROPPABLE_TYPE.SECTIONS}
             >
-              {map(blocks, (id, index) => (
-                <SectionDraggable id={id} index={index} key={id} />
+              {map(blocks, (blockName, index) => (
+                <SectionDraggable
+                  id={blockName}
+                  index={index}
+                  key={blockName}
+                />
               ))}
             </Droppable>
           ))}
