@@ -1,6 +1,12 @@
 {
   "compilerOptions": {
-    "jsx": "react"
+    "target": "esnext",
+    "baseUrl": "./src",
+    "jsx": "react",
+    "paths": {
+      "@components/*": ["./components/*"],
+      "@images/*": ["./assets/images/*"]
+    }
   },
-  "declaration": true
+  "exclude": ["node_modules", "**/node_modules/*", "build"]
 }
