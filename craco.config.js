@@ -1,23 +1,15 @@
-const CracoAlias = require("craco-alias");
-
+const path = require("path");
 module.exports = {
-  plugins: [
-    {
-      plugin: CracoAlias,
-      options: {
-        source: "options",
-        baseUrl: "./",
-        aliases: {
-          "@components": "./src/components",
-          "@images": "./src/assets/images",
-          "@templates": "./src/templates",
-          "@hooks": "./src/hooks",
-          "@utils": "./src/utils",
-          "@slices": "./src/store/slices",
-          "@contexts": "./src/contexts",
-          "@assets": "./src/assets",
-        },
-      },
+  webpack: {
+    alias: {
+      "@components": path.resolve(__dirname, "src/components/"),
+      "@images": path.resolve(__dirname, "src/assets/images/"),
+      "@templates": path.resolve(__dirname, "src/templates"),
+      "@hooks": path.resolve(__dirname, "src/hooks"),
+      "@utils": path.resolve(__dirname, "src/utils"),
+      "@slices": path.resolve(__dirname, "src/store/slices"),
+      "@contexts": path.resolve(__dirname, "src/contexts"),
+      "@assets": path.resolve(__dirname, "src/assets"),
     },
-  ],
+  },
 };
