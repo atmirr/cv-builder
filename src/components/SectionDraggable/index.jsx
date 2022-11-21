@@ -1,21 +1,18 @@
-import React, { lazy } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { withStyles } from "@material-ui/core/styles";
 import { selectSection } from "@slices/layouts";
 import Draggable from "@components/Draggable";
 
-const styles = () => ({});
-
 const templateName = "simple";
 
-const Intro = lazy(() =>
+const Intro = React.lazy(() =>
   import(
     /* webpackChunkName: "introSection" */
     `@templates/${templateName}/Intro`
   )
 );
 
-const Experiences = lazy(() =>
+const Experiences = React.lazy(() =>
   import(
     /* webpackChunkName: "experiencesSection" */
     `@templates/${templateName}/Experiences`
@@ -38,7 +35,4 @@ function SectionDraggable({ id, index }) {
   );
 }
 
-export default withStyles(styles, {
-  withTheme: true,
-  name: "SectionDraggable",
-})(SectionDraggable);
+export default SectionDraggable;

@@ -2,14 +2,13 @@ import React, { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import fieldsPathContext from "@contexts/fields-path";
 import { selectField, save } from "@slices/fields";
-import { Box } from "@material-ui/core";
-import TypographyInput from "../TypographyInput";
+import InlineInput from "../InlineInput";
 
-function TypographyField({
+function InlineField({
   id: fieldId,
-  Wrapper = Box,
+  Wrapper = "div",
   wrapperProps,
-  wrapperClassName,
+  className,
   ...props
 }) {
   const fieldsPath = useContext(fieldsPathContext);
@@ -25,12 +24,12 @@ function TypographyField({
     );
   };
   return !hide ? (
-    <Wrapper {...wrapperProps} className={wrapperClassName}>
-      <TypographyInput placeholder={placeholder} onChange={onChange} {...props}>
+    <Wrapper {...wrapperProps} className={className}>
+      <InlineInput placeholder={placeholder} onChange={onChange} {...props}>
         {value}
-      </TypographyInput>
+      </InlineInput>
     </Wrapper>
   ) : null;
 }
 
-export default TypographyField;
+export default InlineField;

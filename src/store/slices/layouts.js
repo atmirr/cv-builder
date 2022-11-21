@@ -8,19 +8,19 @@ const SECTIONS = {
 export const slice = createSlice({
   name: "layouts",
   initialState: {
-    selectedLayout: "singleColumn",
+    selectedLayout: "dualColumn",
     layouts: {
       singleColumn: {
-        column1: { grids: 12, items: [SECTIONS.INTRO, SECTIONS.EXPERIENCES] },
+        column1: { column: 7, items: [SECTIONS.INTRO, SECTIONS.EXPERIENCES] },
       },
       dualColumn: {
-        column1: { grids: 7, items: [SECTIONS.INTRO] },
-        column2: { grids: 5, items: [SECTIONS.EXPERIENCES] },
+        column1: { column: 3, items: [SECTIONS.INTRO] },
+        column2: { column: 4, items: [SECTIONS.EXPERIENCES] },
       },
       dualColumnWithHeader: {
-        column1: { grids: 12, items: [SECTIONS.INTRO] },
-        column2: { grids: 7, items: [SECTIONS.EXPERIENCES] },
-        column3: { grids: 5, items: [] },
+        column1: { column: 7, items: [SECTIONS.INTRO] },
+        column2: { column: 3, items: [SECTIONS.EXPERIENCES] },
+        column3: { column: 4, items: [] },
       },
     },
     sections: {

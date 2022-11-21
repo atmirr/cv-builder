@@ -1,6 +1,6 @@
 import React from "react";
 import { Draggable as DndDraggable } from "react-beautiful-dnd";
-import DragHandlerIcon from "@assets/images/drag-handler-icon.svg";
+import { ReactComponent as DragHandlerIcon } from "@assets/images/drag-handler-icon.svg";
 
 function Draggable({ children, id, index, className }) {
   return (
@@ -10,10 +10,10 @@ function Draggable({ children, id, index, className }) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           style={provided.draggableProps.style}
-          className={className}
+          className={`${className} relative`}
         >
-          <div {...provided.dragHandleProps}>
-            <img src={DragHandlerIcon} alt="Drag handler" />
+          <div {...provided.dragHandleProps} className="absolute top-0 right-0">
+            <DragHandlerIcon alt="drag handler" className="fill-black-300" />
           </div>
           {children}
         </div>
